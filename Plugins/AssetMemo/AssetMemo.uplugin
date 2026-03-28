@@ -1,0 +1,15 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "Asset Memo",
+	"Description": "Add memos and status to any asset",
+	"Category": "Editor",
+	"Modules": [
+		{
+			"Name": "AssetMemo",
+			"Type": "Editor",
+			"LoadingPhase": "PostEngineInit"
+		}
+	]
+}

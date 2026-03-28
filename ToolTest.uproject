@@ -21,6 +21,10 @@
 			"Enabled": true
 		},
 		{
+			"Name": "AssetMemo",
+			"Enabled": true
+		},
+		{
 			"Name": "ModelingToolsEditorMode",
 			"Enabled": true,
 			"TargetAllowList": [
