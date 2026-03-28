@@ -1,0 +1,23 @@
+# Unreal Engine
+Binaries/
+Build/
+DerivedDataCache/
+Intermediate/
+Saved/
+*.VC.db
+*.opensdf
+*.opendb
+*.sdf
+*.sln
+*.suo
+*.xcworkspace
+*.xcodeproj
+.idea/
+.vs/
+
+# Plugins - 빌드 결과물만 제외 (소스는 포함)
+Plugins/*/Binaries/
+Plugins/*/Intermediate/
+
+# Visual Studio Code
+.vscode/ipch/
