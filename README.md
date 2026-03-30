@@ -10,6 +10,7 @@ Unreal Engine 에디터 플러그인 학습/실험용 프로젝트입니다.
 |---|---|
 | [GuideMeshViewer](#guidemeshviewer) | 스켈레탈 메시 에디터에 가이드 스태틱 메시를 오버레이 렌더링 |
 | [AssetMemo](#assetmemo) | 에셋에 메모와 작업 상태를 붙이고 폴더로 관리 |
+| [AnimTools](#animtools) | 스켈레탈 메시 본 조회 및 AnimBlueprint 자동 생성 유틸리티 |
 
 ---
 
@@ -91,6 +92,65 @@ Plugins/AssetMemo/Source/AssetMemo/
 | `FMemoTreeItem` | 트리 노드 (폴더 또는 에셋, union 구조) |
 | `SAssetMemoWidget` | 메인 위젯. 트리뷰, 드래그&드롭, 폴더 CRUD 처리 |
 | `SAssetMemoTreeRow` | 트리 행 위젯 (SMultiColumnTableRow). 폴더/에셋 행 구분 렌더링 |
+
+---
+
+## AnimTools
+
+스켈레탈 메시의 본 존재 여부를 확인하고, 조건에 맞는 AnimBlueprint 템플릿을 자동으로 복제·설정하는 유틸리티입니다.
+C++ 플러그인(`AnimTools`)과 Python 스크립트(`Content/Python/`)로 구성됩니다.
+
+### 기능
+
+- **HasBone** — 스켈레탈 메시의 Reference Skeleton에서 본 이름을 조회 (Python/Blueprint에서 호출 가능)
+- **ABP 자동 생성** — 선택한 스켈레탈 메시에서 `skirt_1` ~ `skirt_6` 본 중 가장 높은 번호를 감지해 대응하는 템플릿 ABP를 복제
+  - 복제 위치: 스켈레탈 메시와 같은 폴더
+  - 네이밍: `ABP_<스켈레탈메시이름>`
+  - 스켈레톤 자동 할당, 템플릿 플래그 해제, 프리뷰 메시 지정 후 저장
+
+### 사용 방법
+
+1. Content Browser에서 Skeletal Mesh 선택
+2. Editor Utility Blueprint(EUB)에서 아래 Python 실행
+
+```python
+import importlib, create_anim_blueprint_utility
+importlib.reload(create_anim_blueprint_utility)
+create_anim_blueprint_utility.run()
+```
+
+| skirt 본 (최고) | 사용 템플릿 | 생성 결과 |
+|---|---|---|
+| `skirt_1` | `ABP_Test_Template_1` | `ABP_<메시이름>` |
+| `skirt_3` | `ABP_Test_Template_3` | `ABP_<메시이름>` |
+| `skirt_6` | `ABP_Test_Template_6` | `ABP_<메시이름>` |
+| skirt 본 없음 | — | 생성 안 함 |
+
+### 구조
+
+```
+Plugins/AnimTools/Source/AnimTools/
+├── Public/AnimToolsBlueprintLibrary.h    — HasBone, SetupDuplicatedAnimBlueprint 선언
+├── Private/AnimToolsBlueprintLibrary.cpp — GetRefSkeleton().FindBoneIndex, SetPreviewMesh 구현
+├── Public/AnimToolsModule.h
+├── Private/AnimToolsModule.cpp
+└── AnimTools.Build.cs
+
+Content/Python/
+├── create_anim_blueprint_utility.py      — ABP 생성 메인 스크립트
+└── init_unreal.py                        — 에디터 시작 시 자동 임포트
+```
+
+| 함수 | 역할 |
+|---|---|
+| `UAnimToolsBlueprintLibrary::HasBone` | SkeletalMesh + BoneName → bool |
+| `UAnimToolsBlueprintLibrary::SetupDuplicatedAnimBlueprint` | 템플릿 플래그 해제, 프리뷰 메시 지정 |
+| `create_anim_blueprint_utility.run()` | 선택 메시 순회 → 본 감지 → 복제 → 설정 → 저장 |
+
+### 필요 플러그인 (자동 활성화)
+
+- `PythonScriptPlugin`
+- `EditorScriptingUtilities`
 
 ---
 
