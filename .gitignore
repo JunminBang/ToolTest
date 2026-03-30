@@ -21,3 +21,6 @@ Plugins/*/Intermediate/
 
 # Visual Studio Code
 .vscode/ipch/
+
+# Python cache
+Content/Python/__pycache__/

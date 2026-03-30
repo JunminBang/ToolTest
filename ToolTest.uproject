@@ -17,6 +17,18 @@
 	],
 	"Plugins": [
 		{
+			"Name": "PythonScriptPlugin",
+			"Enabled": true
+		},
+		{
+			"Name": "EditorScriptingUtilities",
+			"Enabled": true
+		},
+		{
+			"Name": "AnimTools",
+			"Enabled": true
+		},
+		{
 			"Name": "GuideMeshViewer",
 			"Enabled": true
 		},

@@ -1,0 +1,17 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "Anim Tools",
+	"Description": "Editor utilities for animation/skeleton tooling. Exposes HasBone to Python and Blueprint.",
+	"Category": "Editor",
+	"CanContainContent": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "AnimTools",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		}
+	]
+}
