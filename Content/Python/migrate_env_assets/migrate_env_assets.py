@@ -20,7 +20,7 @@ import json
 import datetime
 from pathlib import Path
 
-SCRIPT_DIR = Path(__file__).parent if "__file__" in dir() else Path("C:/Unreal/ToolTest/Content/Python")
+SCRIPT_DIR = Path(__file__).parent if "__file__" in dir() else Path("C:/Unreal/ToolTest/Content/Python/migrate_env_assets")
 
 # ── 설정 ──────────────────────────────────────────────────────────────────────
 
