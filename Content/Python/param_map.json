@@ -1,0 +1,7 @@
+{
+  "_comment": "외주사 파라미터명 → 프로젝트 파라미터명 매핑. 마스터 머티리얼에 없는 이름만 여기에 추가.",
+  "DiffuseColorMap":  "BaseColor",
+  "EmissiveColorMap": "Emissive",
+  "NormalMap":        "Normal",
+  "DiffuseColor":     "BaseColorTint"
+}
